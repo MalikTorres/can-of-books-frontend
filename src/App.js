@@ -16,7 +16,7 @@ class App extends React.Component {
   render() {
     return (
       <>
-      <body>
+     
         <Router>
           <Header />
           <Routes>
@@ -34,7 +34,7 @@ class App extends React.Component {
           </Routes>
           <Footer />
         </Router>
-                </body>
+             
       </>
     )
   }

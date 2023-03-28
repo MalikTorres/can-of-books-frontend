@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios'
 import Carousel from 'react-bootstrap/Carousel';
 import './bestBooks.css';
+import Button from 'react-bootstrap/Button';
 class BestBooks extends React.Component {
   constructor(props) {
     super(props);
@@ -30,6 +31,25 @@ class BestBooks extends React.Component {
     this.getBooks();
   }
 
+  // TODO: SEND DATA VIA AXIOS WHEN DELETE BUTTON IS CLICKED
+  deleteBook = async (id) => {
+    // TODO: REPLACE ID WITH ID OF THE BOOK THROUGH STATE 
+    try {
+      let url = `${process.env.REACT_APP_SERVER}/books/${id}`
+      console.log(id);
+      await axios.delete(url);
+
+      let updatedBooks = this.state.books.filter(book => book._id !== id);
+
+      this.setState({
+        books: updatedBooks
+      })
+    } catch (error) {
+      console.log(error.response);
+    }
+
+  }
+
 
   render() {
     console.log(this.state.books);
@@ -43,8 +63,8 @@ class BestBooks extends React.Component {
 
         {this.state.books.length > 0 ? (
           <>
-              <Carousel id='caro'>
-            {this.state.books.map((element, idx) =>
+            <Carousel id='caro'>
+              {this.state.books.map((element, idx) =>
                 <Carousel.Item key={idx}>
 
                   <img
@@ -55,11 +75,12 @@ class BestBooks extends React.Component {
                   <Carousel.Caption id='caroCap'>
                     <h3>{element.title}</h3>
                     <p>{element.description}</p>
+                    <Button onClick={() => { this.deleteBook(element._id) }}>DELETE </Button>
                   </Carousel.Caption>
                 </Carousel.Item>
 
-)}
-              </Carousel>
+              )}
+            </Carousel>
           </>
         ) : (
           <h3>No Books Found :(</h3>
