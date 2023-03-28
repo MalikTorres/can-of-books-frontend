@@ -3,13 +3,59 @@ import axios from 'axios'
 import Carousel from 'react-bootstrap/Carousel';
 import './bestBooks.css';
 import Button from 'react-bootstrap/Button';
+import ModalData from './ModalData'
+import { Next } from 'react-bootstrap/esm/PageItem';
+
 class BestBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: []
+      books: [],
+      showModal: false,
     }
   }
+
+handleOpenModal = (event) => {
+  // console.log()
+  this.setState({
+    showModal: true,
+  })
+}
+handleCloseModal =() =>{
+  this.setState({
+    showModal: false,
+  })
+}
+
+
+
+// handleBookSubmit = (event) => {
+//   event.preventDefault();
+
+//   let bookObj = {
+//     title: event.target.title.value,
+//     description: event.target.description.value,
+//     status: event.target.status.checked
+//   }
+//   console.log(bookObj);
+//   this.postBook(bookObj)
+// }
+
+postBook = async (bookObj)=>{
+  try{
+let url = `${process.env.REACT_APP_SERVER}/books`
+
+let createdBook = await axios.post(url, bookObj);
+
+this.setState({
+  books: [...this.state.books, createdBook.data]
+})
+
+  }catch(error){
+    console.log(error.message)
+  }
+}
+
 
   /* TODO: Make a GET request to your API to fetch all the books from the database  */
   getBooks = async () => {
@@ -52,7 +98,7 @@ class BestBooks extends React.Component {
 
 
   render() {
-    console.log(this.state.books);
+    // console.log(this.state.books);
 
     /* TODO: render all the books in a Carousel */
 
@@ -63,6 +109,11 @@ class BestBooks extends React.Component {
 
         {this.state.books.length > 0 ? (
           <>
+          <ModalData
+          handleCloseModal={this.handleCloseModal}
+          showModal={this.state.showModal}
+          postBook={this.postBook}
+          />
             <Carousel id='caro'>
               {this.state.books.map((element, idx) =>
                 <Carousel.Item key={idx}>
@@ -75,7 +126,10 @@ class BestBooks extends React.Component {
                   <Carousel.Caption id='caroCap'>
                     <h3>{element.title}</h3>
                     <p>{element.description}</p>
-                    <Button onClick={() => { this.deleteBook(element._id) }}>DELETE </Button>
+                    <div>
+                      <Button onClick={() => { this.deleteBook(element._id) }}>DELETE </Button>
+                      <Button onClick={this.handleOpenModal}>Add New Book</Button>
+                      </div>
                   </Carousel.Caption>
                 </Carousel.Item>
 
