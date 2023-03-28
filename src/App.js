@@ -9,19 +9,21 @@ import {
   Route
 } from "react-router-dom";
 import About from './About'
+import './index.css'
 
 class App extends React.Component {
 
   render() {
     return (
       <>
+      <body>
         <Router>
           <Header />
           <Routes>
             <Route
               exact path="/"
               element={<BestBooks />}
-            >
+              >
             </Route>
             <Route
               exact path="/About"
@@ -32,6 +34,7 @@ class App extends React.Component {
           </Routes>
           <Footer />
         </Router>
+                </body>
       </>
     )
   }
