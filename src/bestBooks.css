@@ -1,10 +1,24 @@
 #caro{
   width: 700px !important;
-  height: 700px !important
+  height: 700px !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+  
+}
+h2{
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 #caroCap{
   background-color: #37251b;
 }
 #h2{
   text-align: center !important;
+}
+
+
+
+#brand{
+  margin-left: 20px;
 }
