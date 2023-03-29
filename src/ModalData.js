@@ -9,17 +9,17 @@ import Form from 'react-bootstrap/Form';
 class ModalData extends React.Component {
 
 
-  handleBookSubmit = (event) => {
-    event.preventDefault();
+  // handleBookSubmit = (event) => {
+  //   event.preventDefault();
   
-    let bookObj = {
-      title: event.target.title.value,
-      description: event.target.description.value,
-      status: event.target.status.checked
-    }
-    console.log(bookObj);
-    this.props.postBook(bookObj)
-  }
+  //   let bookObj = {
+  //     title: event.target.title.value,
+  //     description: event.target.description.value,
+  //     status: event.target.status.checked
+  //   }
+  //   console.log(bookObj);
+  //   this.props.postBook(bookObj)
+  // }
 
 
   render() {
@@ -33,7 +33,7 @@ onHide={this.props.handleCloseModal}
 
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={this.handleBookSubmit}>
+        <Form onSubmit={this.props.handleBookSubmit}>
 
           <Form.Group controlId='title'>
           <Form.Label>Title of Book</Form.Label>
