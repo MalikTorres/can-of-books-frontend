@@ -4,7 +4,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import './bestBooks.css';
 import Button from 'react-bootstrap/Button';
 import ModalData from './ModalData'
-import { Next } from 'react-bootstrap/esm/PageItem';
+// import { Next } from 'react-bootstrap/esm/PageItem';
 
 class BestBooks extends React.Component {
   constructor(props) {
