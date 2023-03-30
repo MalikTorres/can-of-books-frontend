@@ -3,7 +3,6 @@ import axios from 'axios'
 import Carousel from 'react-bootstrap/Carousel';
 import './bestBooks.css';
 import Button from 'react-bootstrap/Button';
-import ModalData from './ModalData'
 import UpdateModalData from './UpdateModalData'
 // import { Next } from 'react-bootstrap/esm/PageItem';
 
@@ -24,15 +23,8 @@ class BestBooks extends React.Component {
     })
   }
 
-  handleOpenModal2 = (event) => {
-    this.setState({
-      showModal2: true
-    })
-  }
-
   handleCloseModal = () => {
     this.setState({
-      showModal2: false,
       showModal: false,
     })
   }
@@ -40,7 +32,6 @@ class BestBooks extends React.Component {
 
   handleBookSubmit = (event) => {
     event.preventDefault();
-
     let bookObj = {
       title: event.target.title.value,
       description: event.target.description.value,
@@ -59,9 +50,7 @@ class BestBooks extends React.Component {
       let updatedBook = await axios.put(url, bookObjToUpdate)
 
       let updatedBookArray = this.state.books.map(existingBook => {
-        return existingBook._id === bookObjToUpdate._id
-          ? updatedBook.data
-          : existingBook
+        return existingBook._id === bookObjToUpdate._id ? updatedBook.data: existingBook
       })
 
       this.setState({
@@ -149,11 +138,6 @@ class BestBooks extends React.Component {
 
         {this.state.books.length > 0 ? (
           <>
-            <ModalData
-              handleCloseModal={this.handleCloseModal}
-              showModal={this.state.showModal}
-              handleBookSubmit={this.handleBookSubmit}
-            />
             <UpdateModalData
               postBook = {this.postBook}
               handleCloseModal={this.handleCloseModal}

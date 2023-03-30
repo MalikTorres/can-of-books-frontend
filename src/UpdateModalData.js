@@ -14,7 +14,7 @@ this.state = {
   description: this.props.bookToBeUpdated?.description,
   status: this.props.bookToBeUpdated?.status,
   method: this.props.bookToBeUpdated ? 'put' : 'post',
-  formTitle: this.props.bookToBeUpdated ? 'Update My Favorite Book' : 'Add Book to My Favorites'
+  // formTitle: this.props.bookToBeUpdated ? 'Update My Favorite Book' : 'Add Book to My Favorites'
 }
 }
 
@@ -45,19 +45,19 @@ render() {
   
   >
   <Modal.Header>
-
+  {/* <h2>{this.state.formTitle}</h2> */}
   </Modal.Header>
   <Modal.Body>
 
 <Form onSubmit={this.handleSubmit}>
 
 <Form.Group controlId='title'>
-<Form.Label> Update Title Of Book</Form.Label>
+<Form.Label> Title Of Book</Form.Label>
 <Form.Control type='text' placeholder='Enter Book Title'></Form.Control>
 </Form.Group>
 
 <Form.Group controlId='description'>
-  <Form.Label> Update Description Of Book </Form.Label>
+  <Form.Label> Description Of Book </Form.Label>
   <Form.Control type='text' placeholder='Enter Book Descripton'></Form.Control>
 </Form.Group>
 
